@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    h1,h2,h3,h4,h5{
+        @apply font-open uppercase;
+    }
+
+    a{
+        @apply font-open;
+    }
+
+    
+}
+
+@layer components{
+    .modal{
+        @apply fixed inset-0 bg-fifa-blue bg-opacity-60 flex items-center justify-center opacity-0 invisible transition-opacity transition ease-in-out delay-150 hover:-translate-y-1  duration-300;
+    }
+
+    .modal.active{
+        @apply visible opacity-100 transition ease-in-out delay-150 hover:-translate-y-1  duration-300;
+    }
+
+    .modal-content{
+        @apply bg-white rounded p-10 w-96;
+    }
+    
+    .registerModal{
+        @apply fixed inset-0 bg-fifa-blue bg-opacity-60 flex items-center justify-center opacity-0 invisible transition-opacity transition-opacity transition ease-in-out delay-150 hover:-translate-y-1  duration-300;
+    }
+
+    .registerContent{
+        @apply w-96 p-6 shadow-lg bg-white rounded-md
+    }
+
+    .registerModal.active{
+        @apply visible opacity-100
+    }
+}
