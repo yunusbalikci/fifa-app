@@ -1,14 +1,30 @@
 import Header from "components/Header";
-import Section from "components/Section";
-import Carousel from "components/Carousel";
+import Home from "pages/Home";
+import { Route, Routes, Link, NavLink } from "react-router-dom";
+import About from "pages/About";
+import OurStory from "pages/OurStory";
+import Pricing from "pages/Pricing";
+import GetStarted from "pages/GetStarted";
 import Footer from "components/Footer";
+
 function App() {
   return (
     <>
-    <Header></Header>
-    <Section></Section>
-    <Carousel></Carousel>
-    <Footer></Footer>
+    <nav>
+      <Header></Header>
+    </nav>
+    <Routes>
+      <Route path="/" element={<Home/>}></Route>
+      <Route path="/about" element={<About/>}></Route>
+      <Route path="/ourstory" element={<OurStory/>}></Route>
+      <Route path="/pricing" element={<Pricing/>}></Route>
+      <Route path="/getstarted" element={<GetStarted/>}></Route>
+    </Routes>
+    <Footer>
+      <Footer></Footer>
+    </Footer>
+
+    
     </>
   );
 }
