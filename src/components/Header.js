@@ -1,6 +1,18 @@
 import React from "react";
+import LoginModal from "./LoginModal";
+import { useState } from "react";
 
 function Header() {
+    const [isLoginModalOpen, setLoginModalOpen] = useState(false);
+
+  const handleLoginClick = () => {
+    setLoginModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setLoginModalOpen(false);
+  };
+ 
     return (
         <div>
             <header class="bg-fifa-blue py-6 lg:py-8 text-fifa-gray font-open uppercase">
@@ -29,13 +41,14 @@ function Header() {
                             </div>
                         </form>
                         <div class="flex items-center space-x-4 lg:space-x-8 lg:text-lg">
-                            <a href="javascript:;" onclick="modal('login-modal')" class="hover:text-white transistion duration-300">Login</a>
-                            <a href="#" class="bg-fifa-gray px-3 py-1 hover:bg-gray-300 text-fifa-blue hover:text-fifa-blue cursor-pointer transition duration-300 rounded whitespace-nowrap" onclick="rmodal('register-modal')">Sign Up</a>
+                            <a href="javascript:;" onClick={handleLoginClick} class="hover:text-white transistion duration-300">Login</a>
+                            <a href="#" class="bg-fifa-gray px-3 py-1 hover:bg-gray-300 text-fifa-blue hover:text-fifa-blue cursor-pointer transition duration-300 rounded whitespace-nowrap">Sign Up</a>
                         </div>
                     </div>
                 </nav>
             </div>    
-        </header>
+            </header>
+            <LoginModal isOpen={isLoginModalOpen} onClose={handleCloseModal} />
         </div>
     );
 }
