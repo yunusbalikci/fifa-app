@@ -1,10 +1,14 @@
 import React from "react";
 import Person from "../images/person.png"
+import { motion } from "framer-motion";
 
 export default function About(){
 
     return(
-        <div className="bg-zinc-100">
+        <motion.div className="bg-zinc-100"
+        initial = {{ opacity: 0,}}
+        animate = {{ opacity:1}}
+        >
                 <div className="container mx-auto py-10 pb-8">
                     <div class="flex flex-col md:flex-row items-center">
                         <div class=" text-center md:text-left mb-4 md:mb-0">
@@ -27,6 +31,6 @@ export default function About(){
                         <h2 className="text-center text-xl mt-3">Hasan Basri Akcan</h2>
                     </div>
                 </div>
-        </div>
+        </motion.div>
     )
 }

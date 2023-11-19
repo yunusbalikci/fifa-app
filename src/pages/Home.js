@@ -1,14 +1,15 @@
-import Header from "components/Header";
 import Section from "components/Section";
 import Carousel from "components/Carousel";
-import Footer from "components/Footer";
-
+import { motion } from "framer-motion";
 
 export default function Home(){
     return (
-        <div>
+        <motion.div
+        initial = {{ opacity: 0,}}
+        animate = {{ opacity:1}}
+        >
             <Section></Section>
             <Carousel></Carousel>
-        </div>
+        </motion.div>
     )
 }

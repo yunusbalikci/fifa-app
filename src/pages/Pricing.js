@@ -1,6 +1,11 @@
+import { motion } from "framer-motion"
+
 export default function Pricing(){
     return (
-        <div>
+        <motion.div
+        initial = {{ opacity: 0,}}
+        animate = {{ opacity:1}}
+        >
             <section class="bg-white dark:bg-gray-800">
             <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
                 <div class="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
@@ -104,6 +109,6 @@ export default function Pricing(){
                 </div>
             </div>
             </section>
-        </div>
+        </motion.div>
     )
 }
