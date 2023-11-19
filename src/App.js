@@ -7,6 +7,7 @@ import Pricing from "pages/Pricing";
 import GetStarted from "pages/GetStarted";
 import Footer from "components/Footer";
 import Login from "pages/Login";
+import Register from "pages/Register";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Route path="/pricing" element={<Pricing/>}></Route>
       <Route path="/getstarted" element={<GetStarted/>}></Route>
       <Route path="/login" element={<Login/>}></Route>
+      <Route path="/register" element={<Register></Register>}></Route>
     </Routes>
     <Footer>
       <Footer></Footer>

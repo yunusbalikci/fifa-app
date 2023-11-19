@@ -43,7 +43,7 @@ function Header() {
                         </form>
                         <div class="flex items-center space-x-4 lg:space-x-8 lg:text-lg">
                             <a href="javascript:;" onClick={handleLoginClick} class="hover:text-white transistion duration-300">Login</a>
-                            <a href="#" class="bg-fifa-gray px-3 py-1 hover:bg-gray-300 text-fifa-blue hover:text-fifa-blue cursor-pointer transition duration-300 rounded whitespace-nowrap">Sign Up</a>
+                            <Link to="/register" class="bg-fifa-gray px-3 py-1 hover:bg-gray-300 text-fifa-blue hover:text-fifa-blue cursor-pointer transition duration-300 rounded whitespace-nowrap">Sign Up</Link>
                         </div>
                     </div>
                 </nav>
