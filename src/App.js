@@ -23,6 +23,7 @@ function App() {
       <Route path="/getstarted" element={<GetStarted/>}></Route>
       <Route path="/login" element={<Login/>}></Route>
       <Route path="/register" element={<Register></Register>}></Route>
+      <Route path="/home" element={<Home></Home>}></Route>
     </Routes>
     <Footer>
       <Footer></Footer>

@@ -6,6 +6,7 @@ import loginImage3 from "../images/footballer.webp"
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
+
 function LoginModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 

@@ -1,6 +1,9 @@
 import Section from "components/Section";
 import Carousel from "components/Carousel";
 import { motion } from "framer-motion";
+import { Route } from "react-router-dom";
+
+
 
 export default function Home(){
     return (
@@ -8,8 +11,12 @@ export default function Home(){
         initial = {{ opacity: 0,}}
         animate = {{ opacity:1}}
         >
-            <Section></Section>
-            <Carousel></Carousel>
+            <Section>
+                <Section></Section>
+            </Section>
+            <Carousel>
+                
+            </Carousel>
         </motion.div>
     )
 }
