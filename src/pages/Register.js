@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import {  createUserWithEmailAndPassword  } from 'firebase/auth';
 import { auth } from '../firebase';
+import Header from "components/Header";
 
 export default function Register(){
 
@@ -33,6 +34,9 @@ export default function Register(){
         <motion.div
             initial = {{ opacity: 0,}}
             animate = {{ opacity:1}}>
+            <nav>
+                <Header></Header>
+            </nav>
             <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
                 <div class="sm:mx-auto sm:w-full sm:max-w-sm">
                     <h2 class="mt-10 text-center text-4xl font-bold leading-9 tracking-tight text-gray-900">REGISTER</h2>

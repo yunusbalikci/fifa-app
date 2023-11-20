@@ -8,13 +8,12 @@ import GetStarted from "pages/GetStarted";
 import Footer from "components/Footer";
 import Login from "pages/Login";
 import Register from "pages/Register";
+import User from "pages/private/User"
 
 function App() {
   return (
     <>
-    <nav>
-      <Header></Header>
-    </nav>
+    
     <Routes>
       <Route path="/" element={<Home/>}></Route>
       <Route path="/about" element={<About/>}></Route>
@@ -24,6 +23,7 @@ function App() {
       <Route path="/login" element={<Login/>}></Route>
       <Route path="/register" element={<Register></Register>}></Route>
       <Route path="/home" element={<Home></Home>}></Route>
+      <Route path="/user" element={<User></User>}></Route>
     </Routes>
     <Footer>
       <Footer></Footer>

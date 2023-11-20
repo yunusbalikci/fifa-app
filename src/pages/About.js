@@ -1,6 +1,7 @@
 import React from "react";
 import Person from "../images/person.png"
 import { motion } from "framer-motion";
+import Header from "components/Header";
 
 export default function About(){
 
@@ -9,6 +10,9 @@ export default function About(){
         initial = {{ opacity: 0,}}
         animate = {{ opacity:1}}
         >
+            <nav>
+            <Header></Header>
+            </nav>
                 <div className="container mx-auto py-10 pb-8">
                     <div class="flex flex-col md:flex-row items-center">
                         <div class=" text-center md:text-left mb-4 md:mb-0">

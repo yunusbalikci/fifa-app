@@ -3,13 +3,28 @@ import React, {useState} from 'react';
 import {  signInWithEmailAndPassword   } from 'firebase/auth';
 import { auth } from '../firebase';
 import { NavLink, useNavigate } from 'react-router-dom'
+import Header from "components/Header";
+import { FirebaseApp } from "firebase/app";
+import firebase from 'firebase/compat/app';
+import 'firebase/auth';
+
 
 export default function Login(){
 
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-       
+/*
+    const handleLogin = async () => {
+        try {
+          await firebase.auth().signInWithEmailAndPassword(email, password);
+          // Başarıyla giriş yapıldı, özel sayfaya yönlendir
+          navigate.push('/user');
+        } catch (error) {
+          console.error('Giriş hatası:', error.message);
+        }
+      };
+       */
     const onLogin = (e) => {
         e.preventDefault();
         signInWithEmailAndPassword(auth, email, password)
@@ -32,13 +47,16 @@ export default function Login(){
         <motion.div
             initial = {{ opacity: 0,}}
             animate = {{ opacity:1}}>
+            <nav>
+                <Header></Header>
+            </nav>
             <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
                 <div class="sm:mx-auto sm:w-full sm:max-w-sm">
                     <h2 class="mt-10 text-center text-4xl font-bold leading-9 tracking-tight text-gray-900">LOGIN</h2>
                 </div>
 
                 <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form class="space-y-6" action="#" method="POST">
+                    <form class="space-y-6" onSubmit={onLogin}  method="POST">
                     <div>
                         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
                         <div class="mt-2">
