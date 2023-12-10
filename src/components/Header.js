@@ -16,7 +16,7 @@ function Header() {
  
     return (
         <div>
-            <header class="bg-fifa-blue py-6 lg:py-8 text-fifa-gray font-open uppercase">
+            <header class="bg-fifa-blue py-3 lg:py-5 text-fifa-gray font-open uppercase">
                 <div class="container flex items-center justify-between space-x-8 lg:space-x-16">
                     <Link to="/" class="pl-4 md:pl-0 text-3xl lg:text-6xl font-bold text-fifa-gray text-transparent bg-gradient-to-r bg-clip-text from-slate-500 to-white">FCMS</Link>
                 

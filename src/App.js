@@ -9,6 +9,7 @@ import Footer from "components/Footer";
 import Login from "pages/Login";
 import Register from "pages/Register";
 import User from "pages/private/User"
+import Dashboard from "pages/private/Dashboard";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
     
     <Routes>
       <Route path="/" element={<Home/>}></Route>
+      <Route path="/dashboard" element={<Dashboard/>}></Route>
       <Route path="/about" element={<About/>}></Route>
       <Route path="/ourstory" element={<OurStory/>}></Route>
       <Route path="/pricing" element={<Pricing/>}></Route>
