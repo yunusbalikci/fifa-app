@@ -1,28 +1,20 @@
 import React from "react"
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import control from "../images/control.png"
 import football from "../images/football.png"
-import Dashboard from "pages/private/Dashboard";
-import admin from 'images/admin.png'
-import team from 'images/team.png'
-import shedule from 'images/schedule.png'
-import statics from 'images/statistic.png'
-import health from 'images/health.png'
-import training from 'images/training.png'
-import competitions from 'images/competitions.png'
+
 
 export default function UserHeader(){
     const [open,setOpen] = useState(true)
     const Menus = [
-        {title: "Dashboard", src:{Dashboard}},
-        {title: "Administration", src:{admin}},
-        {title: "Team Staff", src:{team}},
-        {title: "Competitions", src:{competitions}},
-        {title: "Health", src:{health}},
-        {title: "Shedule", src:{shedule}},
-        {title: "Training", src:{training}},
-        {title: "Statistics", src:{statics}},
+        {title: "Dashboard", src:"https://cdn-icons-png.flaticon.com/512/187/187474.png"},
+        {title: "Administration", src:"https://cdn-icons-png.flaticon.com/512/2082/2082875.png"},
+        {title: "Team Staff", src:"https://cdn-icons-png.flaticon.com/512/236/236811.png"},
+        {title: "Competitions", src:"https://cdn-icons-png.flaticon.com/512/4012/4012470.png", gap : true},
+        {title: "Health", src:"https://brisdoc.co.uk/wp-content/uploads/2020/12/Health-Icon-1.svg"},
+        {title: "Shedule", src:"https://cdn-icons-png.flaticon.com/512/3652/3652191.png"},
+        {title: "Training", src:"https://cdn-icons-png.flaticon.com/512/861/861534.png", gap : true},
+        {title: "Statistics", src:"https://cdn-icons-png.flaticon.com/512/1011/1011579.png"},
 
     ]
     return(
@@ -35,14 +27,15 @@ export default function UserHeader(){
                 </div>
                 <ul className="pt-6">
                     {Menus.map((menu, index) => (
-                        <li className="text-gray-300 mt-3 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-gray-600 duration-200 rounded-md" key={index}>
-                            <img src={menu.src} className="w-6 h-6" />
+                        <li className={`text-gray-300 mt-3 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-gray-600 duration-200 rounded-md ${menu.gap ? "mt-9" : "mt-2"} `} key={index}>
+                            <img src={menu.src} className="w-8 h-8" />
 
                             <span className={`${!open && "hidden"} origin-left text-xl duration-200`}>{menu.title}</span>
                         </li>
                     ))}
                 </ul>
             </div>
+
             
         </div>
     )
