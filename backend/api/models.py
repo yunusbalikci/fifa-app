@@ -8,7 +8,7 @@ class Players20(models.Model):
     short_name = models.CharField(max_length=255, verbose_name="Short Name")
     long_name = models.CharField(max_length=255, verbose_name="Long Name")
     age = models.IntegerField(verbose_name="Age")
-    dob = models.DateField(verbose_name="Date of Birth")
+    dob = models.CharField(max_length=255, verbose_name="Date of Birth")
     height_cm = models.IntegerField(verbose_name="Height (cm)")
     weight_kg = models.IntegerField(verbose_name="Weight (kg)")
     nationality = models.CharField(max_length=255, verbose_name="Nationality")

@@ -12,4 +12,3 @@ class TeamsAndLeaguesSerializer(ModelSerializer):
     class Meta:
         model = TeamsAndLeagues
         fields = "__all__"
-
