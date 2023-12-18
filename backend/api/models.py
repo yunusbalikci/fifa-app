@@ -8,7 +8,6 @@ class Players20(models.Model):
     short_name = models.CharField(max_length=255, verbose_name="Short Name")
     long_name = models.CharField(max_length=255, verbose_name="Long Name")
     age = models.IntegerField(verbose_name="Age")
-    dob = models.CharField(max_length=255, verbose_name="Date of Birth")
     height_cm = models.IntegerField(verbose_name="Height (cm)")
     weight_kg = models.IntegerField(verbose_name="Weight (kg)")
     nationality = models.CharField(max_length=255, verbose_name="Nationality")
@@ -32,7 +31,7 @@ class Players20(models.Model):
     team_position = models.CharField(max_length=255, verbose_name="Team Position")
     team_jersey_number = models.FloatField(verbose_name="Team Jersey Number")
     loaned_from = models.CharField(max_length=255, verbose_name="Loaned From")
-    joined = models.CharField(max_length=255, verbose_name="Joined")
+    joined = models.DateTimeField(verbose_name="Joined")
     contract_valid_until = models.FloatField(verbose_name="Contract Valid Until")
     nation_position = models.CharField(max_length=255, verbose_name="Nation Position")
     nation_jersey_number = models.FloatField(verbose_name="Nation Jersey Number")
@@ -121,6 +120,7 @@ class Players20(models.Model):
     cb = models.CharField(max_length=255, verbose_name="CB")
     rcb = models.CharField(max_length=255, verbose_name="RCB")
     rb = models.CharField(max_length=255, verbose_name="RB")
+    dob = models.DateField(verbose_name="Date of Birth")
 
     def __str__(self):
         return self.short_name
