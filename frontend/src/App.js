@@ -10,6 +10,7 @@ import Login from "pages/Login";
 import Register from "pages/Register";
 import User from "pages/private/User"
 import Dashboard from "pages/private/Dashboard";
+import Statistics from "pages/private/Statistics";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
       <Route path="/register" element={<Register></Register>}></Route>
       <Route path="/home" element={<Home></Home>}></Route>
       <Route path="/user" element={<User></User>}></Route>
+      <Route path="/statistics" element={<Statistics></Statistics>}></Route>
     </Routes>
     <Footer>
       <Footer></Footer>
