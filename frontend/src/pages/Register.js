@@ -59,13 +59,13 @@ export default function Register(){
 
                     <div>
                         <div class="flex items-center justify-between">
-                        <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Confirm Password</label>
-                        <div class="text-sm">
-                            <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Already have an account?</a>
-                        </div>
+                            <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Confirm Password</label>
+                            <div class="text-sm">
+                                <button class="font-semibold text-indigo-600 hover:text-indigo-500" onClick={() => {}}>Already have an account?</button>
+                            </div>
                         </div>
                         <div class="mt-2">
-                        <input id="cpassword" name="cpassword" type="password" autocomplete="current-password" required class="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+                            <input id="cpassword" name="cpassword" type="password" autocomplete="current-password" required class="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
                         </div>
                     </div>
 
@@ -75,8 +75,8 @@ export default function Register(){
                     </form>
 
                     <p class="mt-10 text-center text-sm text-gray-500">
-                    Not a member? <br></br>
-                    <a href="#" class="font-semibold leading-6 text-blue-700 hover:text-blue-500">Start a 14 day free trial</a>
+                        Not a member? <br></br>
+                        <button class="font-semibold leading-6 text-blue-700 hover:text-blue-500" onClick={() => {}}>Start a 14 day free trial</button>
                     </p>
                 </div>
             </div>
