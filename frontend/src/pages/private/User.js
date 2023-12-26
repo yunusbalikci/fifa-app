@@ -62,10 +62,10 @@ function User() {
                 </div>
                 <div className='ml-5  mt-4'>
                     <div className='flex my-auto space-x-6 box-border'>
-                        <div className='box-border rounded h-40 w-96 p-4 shadow-md bg-fifa-newgray hover:bg-fifa-gray2 transition duration-200'>
+                        <Link to="/admin" className='box-border rounded h-40 w-96 p-4 shadow-md bg-fifa-newgray hover:bg-fifa-gray2 transition duration-200'>
                             <img src={admin} className='w-20 h-20'></img>
                             <h1 className='mt-3 font-bold mr-5 pr-3'>administration</h1>     
-                        </div>
+                        </Link>
                         <div className='box-border rounded h-40 w-40 shadow-md bg-fifa-yellow hover:bg-yellow-400 transition duration-200'>
                             <img src={competitions} className='w-24 h-24 mx-auto mt-5'></img>
                             <h1 className='font-bold text-center mt-2'>competitions</h1>
@@ -89,10 +89,10 @@ function User() {
                         <h1 className='font-bold text-center '>Training</h1>
                     </div>             
                     </div>
-                    <div className='mt-5 box-border rounded h-40 shadow-md w-auto mb-5 p-4 bg-fifa-new hover:bg-fifa-blue3 transition duration-200'>
+                    <Link to="/statistics" className='mt-5 box-border rounded h-40 shadow-md w-auto mb-5 p-4 bg-fifa-new hover:bg-fifa-blue3 transition duration-200'>
                         <img src={statics} className='w-20 h-20'></img>      
                         <h1 className='mt-3 font-bold mr-4 pr-3'>team statics</h1>     
-                    </div>
+                    </Link>
             </div>
             </div>
 
