@@ -21,7 +21,8 @@ def PlayerDetail(request, pk):
 
 @api_view(["GET"])
 def PlayerList(request):
-    players = Players20.objects.all()
+    # select top 10 * from players20 order by overall desc
+    players = Players20.objects.all().order_by("-overall")[:10]
     serializer = Players20Serializer(players, many=True)
     return Response(serializer.data)
 
