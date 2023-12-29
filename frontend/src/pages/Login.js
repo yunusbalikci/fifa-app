@@ -2,7 +2,7 @@ import { motion } from "framer-motion"
 import React, {useState} from 'react';
 import {  signInWithEmailAndPassword   } from 'firebase/auth';
 import { auth } from '../firebase';
-import { NavLink, useNavigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import Header from "components/Header";
 import { FirebaseApp } from "firebase/app";
 import firebase from 'firebase/compat/app';
@@ -11,35 +11,30 @@ import 'firebase/auth';
 
 export default function Login(){
 
-    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-/*
-    const handleLogin = async () => {
-        try {
-          await firebase.auth().signInWithEmailAndPassword(email, password);
-          // Başarıyla giriş yapıldı, özel sayfaya yönlendir
-          navigate.push('/user');
-        } catch (error) {
-          console.error('Giriş hatası:', error.message);
-        }
-      };
-       */
-    const onLogin = (e) => {
-        e.preventDefault();
-        signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed in
-            const user = userCredential.user;
-            navigate("/user")
-            console.log(user);
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorCode, errorMessage)
-        });
-       
+    const [redirect,setRedirect] = useState(false)
+
+        const submit = async (e) => {
+            e.preventDefault();
+            await fetch('http://127.0.0.1:8000/api-auth/login/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+                body: JSON.stringify({
+                    email,
+                    password
+                })
+            })
+
+        setRedirect(true)
+        console.log(email,password);
+    }
+
+    if(redirect){
+        return <Navigate to="/user"/>
     }
 
     
@@ -56,11 +51,11 @@ export default function Login(){
                 </div>
 
                 <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form class="space-y-6" onSubmit={onLogin}  method="POST">
+                    <form onSubmit={submit} class="space-y-6">
                     <div>
                         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
                         <div class="mt-2">
-                        <input id="emailiadress" onChange={(e)=>setEmail(e.target.value)} name="email" type="email" autocomplete="email" required class="block w-full rounded-md border-0 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+                        <input id="email" onChange={(e)=>setEmail(e.target.value)} name="email" type="email" autocomplete="email" required class="block w-full rounded-md border-0 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
                         </div>
                     </div>
 
@@ -77,7 +72,7 @@ export default function Login(){
                     </div>
 
                     <div>
-                        <button type="submit" onClick={onLogin} class="flex w-full justify-center rounded-md bg-fifa-blue px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-cyan-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
+                        <button type="submit" class="flex w-full justify-center rounded-md bg-fifa-blue px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-cyan-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
                     </div>
                     </form>
 

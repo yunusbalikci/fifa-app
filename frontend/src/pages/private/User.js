@@ -10,7 +10,7 @@ import health from 'images/health.png'
 import training from 'images/training.png'
 import competitions from 'images/competitions.png'
 import person from 'images/person.jpg'
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from 'framer-motion';
 import facebook from 'images/facebook.png'
 import twitter from 'images/twitter.png'
@@ -18,6 +18,33 @@ import instagram from 'images/instagram.png'
 import Dashboard from './Dashboard';
 
 function User() {
+    const [name, setName] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api-auth/', {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          credentials: 'include',
+        });
+
+        if (response.ok) {
+          const content = await response.json();
+          setName(content.name);
+        } else {
+          // Hata durumu için gerekli işlemleri burada yapabilirsiniz.
+          console.error("Failed to fetch user data");
+        }
+      } catch (error) {
+        console.error("An error occurred while fetching user data", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   
   return (
     <div>
@@ -41,7 +68,7 @@ function User() {
                       <div class="flex items-center space-x-2 lg:space-x-5 lg:text-lg">
                         <img src={person} className='h-12 w-12 rounded-full cursor-pointer'></img>
                         <div className='border ml-5 h-10'></div>
-                        <span>Yunus</span>
+                        <span>{name}</span>
                       </div>
                     </div>
 

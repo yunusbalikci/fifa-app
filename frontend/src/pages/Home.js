@@ -3,10 +3,12 @@ import Carousel from "components/Carousel";
 import { motion } from "framer-motion";
 import { Route } from "react-router-dom";
 import Header from "components/Header";
+import { useEffect } from "react";
+import Footer from "components/Footer";
 
 
-
-export default function Home(){
+export default function Home(props){
+    
     return (
         <motion.div
             
@@ -15,13 +17,14 @@ export default function Home(){
         >
             <nav>
             <Header></Header>
+            <p>{props.name}</p>
             </nav>
             <Section>
                 <Section></Section>
             </Section>
             <Carousel>
-                
             </Carousel>
+            <Footer></Footer>
         </motion.div>
     )
 }

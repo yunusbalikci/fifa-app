@@ -1,34 +1,40 @@
 import { motion } from "framer-motion"
 import React, {useState} from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Navigate  } from 'react-router-dom';
 import {  createUserWithEmailAndPassword  } from 'firebase/auth';
 import { auth } from '../firebase';
 import Header from "components/Header";
+import { SyntheticEvent } from 'react';
 
 export default function Register(){
 
-    const navigate = useNavigate();
+    const [name,setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
-    const onSubmit = async (e) => {
+    const [redirect,setRedirect] = useState(false)
+    const submit = async (e) => {
         e.preventDefault();
-
-        await createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user;
-                console.log(user);
-                navigate("/login");
-                // ...
+        await fetch('http://127.0.0.1:8000/api-auth/register/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name,
+                email,
+                password
             })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
-                // ..
-            });
-    };
+        })
+
+        setRedirect(true)
+        
+    }
+
+    if(redirect){
+        return <Navigate to="/login"/>
+
+    }
+
 
     return(
         <motion.div
@@ -43,34 +49,43 @@ export default function Register(){
                 </div>
 
                 <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form class="space-y-6" action="#" method="POST">
+                <form class="space-y-6" onSubmit={submit}>
+
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
+                            
+                        </div>
+                        <div class="mt-2">
+                            <input id="name" name="name" type="password" autocomplete="name" required class="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                        </div>
+                    </div>
                     <div>
                         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
                         <div class="mt-2">
-                        <input id="email" value={email} onChange={(e) => setEmail(e.target.value)} name="email" type="email" autocomplete="email" required class="block w-full rounded-md border-0 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+                        <input id="email" name="email" type="email" autocomplete="email" required class="block w-full rounded-md border-0 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
                         </div>
                     </div>
                     <div>
                         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
                         <div class="mt-2">
-                        <input id="password" value={password} onChange={(e) => setPassword(e.target.value)}  name="password" type="password" autocomplete="password" required class="block w-full rounded-md border-0 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="flex items-center justify-between">
-                            <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Confirm Password</label>
-                            <div class="text-sm">
-                                <button class="font-semibold text-indigo-600 hover:text-indigo-500" onClick={() => {}}>Already have an account?</button>
+                        <input id="password" name="password" type="password" autocomplete="password" required class="block w-full rounded-md border-0 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <div class="text-sm">
+                                <button class="font-semibold text-indigo-600 hover:text-indigo-500" >Already have an account?</button>
                             </div>
                         </div>
-                        <div class="mt-2">
-                            <input id="cpassword" name="cpassword" type="password" autocomplete="current-password" required class="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
-                        </div>
                     </div>
 
+                    
+
                     <div>
-                        <button type="submit" onClick={onSubmit} class="flex w-full justify-center rounded-md bg-fifa-blue px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-cyan-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign Up</button>
+                        <button type="submit"  class="flex w-full justify-center rounded-md bg-fifa-blue px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-cyan-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign Up</button>
                     </div>
                     </form>
 

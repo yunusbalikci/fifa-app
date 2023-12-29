@@ -5,8 +5,21 @@ const Statistics = () => {
   const [allPlayers, setAllPlayers] = useState([]);
   const [realmadridPlayers, setRealMadridPlayers] = useState([]);
   const [selectedPosition, setSelectedPosition] = useState('');
+  const [selectedPlayer, setSelectedPlayer] = useState(null);
 
   const apiUrl = 'http://127.0.0.1:8000/api/players/';
+
+
+  const getBackgroundColor = ({ value }) => {
+    if (value < 65){
+        return "bg-red-500"
+    } else if (value < 75){
+        return "bg-orange-500"
+    }
+    else{
+        return "bg-green-500"
+    }
+    }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,15 +46,17 @@ const Statistics = () => {
 
   const handlePositionChange = (event) => {
     setSelectedPosition(event.target.value);
+    setSelectedPlayer(null);
+  };
+
+  const handlePlayerClick = (player) => {
+    setSelectedPlayer(player);
   };
 
   return (
     <div className='flex'>
       <UserHeader />
-      <div className='ml-3'>
-        <label htmlFor="countries" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          Select a position
-        </label>
+      <div className='ml-3 mt-5'>
         <select
           id="countries"
           className="bg-gray-50 border w-64 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -57,28 +72,62 @@ const Statistics = () => {
           <option value="LW">LW</option>
           <option value="ST">ST</option>
         </select>
-        <img className='w-32 h-32 items-center justify-center mx-auto mt-2' src='https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/1200px-Real_Madrid_CF.svg.png'></img>
-        <h2 className='mt-5 mb-3 text-center text-3xl mx-auto justify-center ml-24 font-open'>Real Madrid</h2>
         {realmadridPlayers ? (
           <div className='grid grid-cols-2 grid-rows-1 gap-3'>
             <div className='flex flex-nowrap'>
               <ul className='flex flex-wrap space-x-8 space-y-4 '>
                 {realmadridPlayers.map((player) => (
-                  <li key={player.sofifa_id}>
-                    <div className='bg-gray-100 mt-1 ml-3 w-32 h-32 rounded-lg shadow-md'>
-                      --- {player.short_name} - {player.age} - {player.player_positions} - Overall:{player.overall} ---
+                  <li key={player.sofifa_id} onClick={() => handlePlayerClick(player)} className='mt-4'>
+                    <div className='bg-gray-50 mt-1 ml-3 w-44 h-auto  border-blue-200 border-2 rounded-lg shadow-md cursor-pointer'>
+                      <p className='text-2xl font-open  text-center p-2 font-bold'>{player.short_name}</p>
+                      <h3 className='text-xl font-open text-right mr-3'>{player.age}</h3>
+                      <img className='rounded-lg' src="https://b.fssta.com/uploads/application/soccer/headshots/884.png" alt="" />
                     </div>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div className='item-center ml-28 mx-auto justify-center mt-10 flex'>
-              <img
-                src='https://store.donanimhaber.com/43/7e/fc/437efcd169109300e39dcf613061e315.png'
-                className='w-96 h-96 mx-auto items-center justify-center'
-                alt="Real Madrid Logo"
-              ></img>
+            <div className='item-center ml-28 mx-auto justify-center mt-5 flex'>
+               {selectedPlayer && (
+                <div className='w-full'>
+                  <table className="table-auto bg-white w-128 h-full rounded-md shadow-md uppercase font-open border text-xl mt-3">
+                        <thead>
+                            <tr>
+                                <th className="pt-2">abilities</th>
+                                <th className="pt-2">overall</th>
+                            </tr>
+                        </thead>
+                        <tbody className="border">
+                            <tr>
+                                <td className="pl-2 hover:bg-gray-100 duration-200 rounded-md">Pace</td>
+                                <td className={`pl-2  duration-200 rounded-md`}>{selectedPlayer.pace}</td>
+                            </tr>
+                            <tr>
+                                <td className="pl-2 hover:bg-gray-100 duration-200 rounded-md">Mentality</td>
+                                <td className={`pl-2  duration-200 rounded-md`}>{selectedPlayer.mentality_aggression}</td>
+                            </tr>
+                            <tr>
+                                <td className="pl-2 hover:bg-gray-100 duration-200 rounded-md">Jumping</td>
+                                <td className={`pl-2  hover:opacity-70 duration-200 rounded-md `}>{selectedPlayer.power_jumping}</td>
+                            </tr>
+                            <tr>
+                                <td className="pl-2 hover:bg-gray-100 duration-200 rounded-md">Shooting</td>
+                                <td className={`pl-2  duration-200 rounded-md `}>{selectedPlayer.shooting}</td>
+                            </tr>
+                            <tr>
+                                <td className="pl-2 hover:bg-gray-100 duration-200 rounded-md">Passing</td>
+                                <td className={`pl-2  duration-200 rounded-md `}>{selectedPlayer.passing}</td>
+                            </tr>
+                            <tr>
+                                <td className="pl-2 hover:bg-gray-100 duration-200 rounded-md">Defending</td>
+                                <td className={`pl-2  duration-200 rounded-md`}>{selectedPlayer.defending}</td>
+                            </tr>
+                          
+                        </tbody>
+                    </table>
+                </div>
+              )}
             </div>
           </div>
         ) : (
