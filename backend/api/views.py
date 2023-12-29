@@ -21,11 +21,13 @@ def PlayerDetail(request, pk):
 
 @api_view(["GET"])
 def PlayerList(request):
-    # select top 10 * from players20 order by overall desc
-    players = Players20.objects.all().order_by("-overall")[:10]
+    # select players from Real Madrid 
+    players = Players20.objects.filter(club="Real Madrid")
     serializer = Players20Serializer(players, many=True)
     return Response(serializer.data)
 
+    
+   
 
 @api_view(["GET"])
 def TeamList(request):
