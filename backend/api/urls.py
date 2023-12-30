@@ -7,4 +7,5 @@ urlpatterns = [
     path("players/<int:pk>/", views.PlayerDetail, name="player"),
     path("teams/", views.TeamList, name="teams"),
     path("deneme/", views.deneme, name="deneme"),
+    path("PlayerValue/", views.PlayerValue, name="PlayerValue"),
 ]
