@@ -26,8 +26,6 @@ def PlayerList(request):
     serializer = Players20Serializer(players, many=True)
     return Response(serializer.data)
 
-    
-   
 
 @api_view(["GET"])
 def TeamList(request):
