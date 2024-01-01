@@ -169,12 +169,12 @@ test_data = pd.DataFrame(test_data, columns=selected_features)
 print("Predicted Position:", clf.predict(test_data))
 
 # save model wiht joblib into models folder
-from joblib import dump, load
+import joblib
 
-dump(clf, "../Models/positionQuess.joblib")
+joblib.dump(clf, "../models/position_guess_model.pkl")
 
 # load model from models folder
-clf = load("../Models/positionQuess.joblib")
+clf = joblib.load("../models/position_guess_model.pkl")
 
 # test model with new random data
 test_data = [[80, 80, 80, 80, 80, 80, 80, 80, 80, 80]]
@@ -182,3 +182,4 @@ test_data = [[80, 80, 80, 80, 80, 80, 80, 80, 80, 80]]
 test_data = pd.DataFrame(test_data, columns=selected_features)
 
 print("Predicted Position:", clf.predict(test_data))
+

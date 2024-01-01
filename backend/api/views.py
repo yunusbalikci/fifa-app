@@ -11,7 +11,7 @@ import pandas as pd
 
 model = load(os.path.join(os.path.dirname(__file__), "../Models/priceQuess.pkl"))
 position_model = load(
-    os.path.join(os.path.dirname(__file__), "../Models/positionQuess.joblib")
+    os.path.join(os.path.dirname(__file__), "../Models/position_guess_model.pkl")
 )
 
 
@@ -81,7 +81,7 @@ def deneme(request):
     return Response(routes)
 
 
-@api_view(["GET", "POST"])
+@api_view(["POST"])
 def PlayerValue(request):
     if request.method == "POST":
         Overall = request.data.get("Overall")
@@ -133,33 +133,46 @@ def PlayerValue(request):
         return Response("Send a POST request with the features to get a prediction.")
 
 
-@api_view(["GET", "POST"])
+@api_view(["POST"])
 def positionQuess(request):
-    # Map positions to numerical values
     """
-    "ST": 0,
-    "RW": 1,
-    "LW": 1,
-    "RM": 2,
-    "CM": 3,
-    "LM": 2,
-    "CAM": 4,
-    "CF": 5,
-    "CDM": 6,
-    "CB": 7,
-    "LB": 8,
-    "RB": 8,
-    "RWB": 8,
-    "LWB": 8,
+    Selected columns:
+    'Acceleration', 'Crossing', 'Dribbling', 'Finishing',
+    'Heading accuracy', 'Long passing', 'Positioning', 
+    'Sliding tackle', 'Standing tackle', 'Vision'
+    
+    Position mapping:
+     "ST": 0,"RW": 1,"LW": 1, "RM": 2,"CM": 3,"LM": 2,
+    "CAM": 4,"CF": 5,"CDM": 6,"CB": 7,"LB": 8,"RB": 8,
+    "RWB": 8,"LWB": 8,
     """
+    
     if request.method == "POST":
-        # Get features
-        features = request.data.get("features")
+        Acceleration = request.data.get("Acceleration")
+        Crossing = request.data.get("Crossing")
+        Dribbling = request.data.get("Dribbling")
+        Finishing = request.data.get("Finishing")
+        Heading_accuracy = request.data.get("Heading_accuracy")
+        Long_passing = request.data.get("Long_passing")
+        Positioning = request.data.get("Positioning")
+        Sliding_tackle = request.data.get("Sliding_tackle")
+        Standing_tackle = request.data.get("Standing_tackle")
+        Vision = request.data.get("Vision")
 
-        # Check if features is None
-        if features is None:
-            return Response("Features are missing in the request")
-        
+        # Create a list of features
+        features = [
+            Acceleration,
+            Crossing,
+            Dribbling,
+            Finishing,
+            Heading_accuracy,
+            Long_passing,
+            Positioning,
+            Sliding_tackle,
+            Standing_tackle,
+            Vision,
+        ]
+
         # Create a dictionary for the response
         response = {}
 
@@ -167,13 +180,13 @@ def positionQuess(request):
         feature_names = [
             "Acceleration",
             "Crossing",
+            "Dribbling",
             "Finishing",
             "Heading accuracy",
-            "Interceptions",
             "Long passing",
-            "Marking",
             "Positioning",
             "Sliding tackle",
+            "Standing tackle",
             "Vision",
         ]
 
@@ -193,7 +206,5 @@ def positionQuess(request):
         return Response(response)
 
     else:
-        return Response(
-            "Send a POST request with the features to get a prediction. Features must be in the following order: "
-            + ", ".join(feature_names)
-        )
+        return Response("Send a POST request with the features to get a prediction.")
+    
