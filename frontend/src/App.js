@@ -31,7 +31,7 @@ function App() {
           setName(content.name);
         } else {
           // Hata durumu için gerekli işlemleri burada yapabilirsiniz.
-          console.error("Failed to fetch user data");
+          console.error(`Failed to fetch user data. Status: ${response.status}`);
         }
       } catch (error) {
         console.error("An error occurred while fetching user data", error);

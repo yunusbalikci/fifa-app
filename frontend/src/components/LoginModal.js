@@ -23,7 +23,7 @@ function LoginModal({ isOpen, onClose }) {
               <div className="border p-4 border-gray rounded cursor-pointer" onClick={onClose}>
                 <div className="flex flex-col items-center">
                 <img className="flex w-36  items-center mx-auto mt-3" alt="loginimage" src={loginImage1}></img>             
-                <Link to="/login" className="text-center text-xl mt-5 uppercase">medicine</Link>
+                <Link to="/login" className="text-center text-black text-xl mt-5 uppercase">medicine</Link>
                 </div>            
               </div>  
           </Link>
@@ -32,7 +32,7 @@ function LoginModal({ isOpen, onClose }) {
             <div className="border p-4 border-gray rounded cursor-pointer" onClick={onClose}>
               <div className="flex flex-col items-center">
               <img className="flex w-36  items-center mx-auto mt-3" alt="loginimage" src={loginImage2}></img>             
-              <Link to="/login" className="text-center text-xl mt-5 uppercase">coach</Link>
+              <Link to="/login" className="text-center text-xl mt-5 text-black uppercase">coach</Link>
               </div>            
             </div>  
           </Link>
@@ -41,7 +41,7 @@ function LoginModal({ isOpen, onClose }) {
             <div className="border p-4 border-gray rounded cursor-pointer" onClick={onClose}>
               <div className="flex flex-col items-center">
               <img className="flex w-36  items-center mx-auto mt-3" alt="loginimage" src={loginImage3}></img>             
-              <Link to="/login" className="text-center text-xl mt-5 uppercase">footballer</Link>
+              <Link to="/login" className="text-center text-xl mt-5 text-black uppercase">footballer</Link>
               </div>            
             </div>  
           </Link>

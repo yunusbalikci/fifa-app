@@ -23,7 +23,7 @@ function User() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api-auth/', {
+        const response = await fetch('http://127.0.0.1:8000/api-auth/user/', {
           headers: {
             'Content-Type': 'application/json'
           },
@@ -49,38 +49,14 @@ function User() {
   return (
     <div>
        
-      <header class="bg-fifa-blue py-2 lg:py-3  text-fifa-gray font-open uppercase">
-                <div class="container flex items-center justify-between space-x-8 lg:space-x-16">
-                    <Link to="/" class="pl-4 md:pl-0 text-3xl lg:text-6xl font-bold text-fifa-gray text-transparent bg-gradient-to-r bg-clip-text from-slate-500 to-white">FCMS</Link>
-                
-                    <div class="block md:hidden pr-4">
-                        <div class="space-y-1 cursor-pointer">
-                        <div class="bg-fifa-gray w-8 h-1 rounded-full"></div>
-                        <div class="bg-fifa-gray w-8 h-1 rounded-full"></div>
-                        <div class="bg-fifa-gray w-8 h-1 rounded-full"></div>
-                    </div>
-                </div>
-                
-                <nav class="hidden md:flex justify-between flex-1">
-                    <div class="flex items-center text-sm lg:text-lg space-x-4 lg:space-x-8">  
-                    </div>
-                    <div class="flex border border-spacing-4 p-3 border-fifa-gray border-opacity-60 border-x-2 border-y-2 rounded-md items-center space-x-4 cursor-pointer lg:space-x-8">                   
-                      <div class="flex items-center space-x-2 lg:space-x-5 lg:text-lg">
-                        <img src={person} className='h-12 w-12 rounded-full cursor-pointer'></img>
-                        <div className='border ml-5 h-10'></div>
-                        <span>{name}</span>
-                      </div>
-                    </div>
 
-                </nav>
-            </div>    
-      </header>
+      <Header></Header>
 
       <motion.div
       initial = {{ opacity: 0, translateY:30}}
       animate = {{ opacity:1,translateY:0}}
        className="grid grid-cols-2  bg-fifa-bg gap-4 font-open text-white">
-            <div className='ml-5'>
+            <div className='ml-5 h-screen'>
                 <div className='ml-5 box-border mt-3 rounded my-auto shadow-md h-40 w-auto p-4  bg-fifa-new hover:bg-blue-600 transition duration-200'>
                 <Link to="/dashboard" className='flex flex-col  cursor-pointer'>
                     <img src={dashboard} className='w-20 h-20 mb-2' alt='Dashboard'></img>      
@@ -103,7 +79,7 @@ function User() {
                     </div>
                 </div>
                 <div className='flex mt-5 space-x-6 box-border'>
-                    <div className='box-border rounded h-40 w-96 shadow-md bg-fifa-newgray hover:bg-fifa-gray transition duration-200'>
+                    <div className='box-border rounded h-40 w-96 shadow-md bg-fifa-newgray hover:bg-fifa-gray2 transition duration-200'>
                         <img src={team} className='w-24 h-24 ml-4 mt-2'></img>
                         <h1 className='mt-3 font-bold mr-4 ml-3 pr-3'>Team Staff</h1>
                     </div>
@@ -116,10 +92,13 @@ function User() {
                         <h1 className='font-bold text-center '>Training</h1>
                     </div>             
                     </div>
-                    <Link to="/statistics" className='mt-5 box-border rounded h-40 shadow-md w-auto mb-5 p-4 bg-fifa-new hover:bg-fifa-blue3 transition duration-200'>
+                    <div className='mt-5 box-border rounded h-40 shadow-md w-auto mb-5 p-4 bg-fifa-new hover:bg-fifa-blue3 transition duration-200'>
+                    <Link to="/statistics" className='flex flex-col  cursor-pointer'>
+
                         <img src={statics} className='w-20 h-20'></img>      
                         <h1 className='mt-3 font-bold mr-4 pr-3'>team statics</h1>     
                     </Link>
+                    </div>
             </div>
             </div>
 
