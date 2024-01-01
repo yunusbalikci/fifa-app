@@ -58,6 +58,7 @@ selected_columns = [
     "Age",
     "Value",
 ]
+
 df = df[selected_columns]
 
 
