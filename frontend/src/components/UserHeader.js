@@ -20,7 +20,7 @@ export default function UserHeader(){
     ]
     return(
         <div className="flex">
-            <div className={`${open ? "w-72" : "w-24 "} duration-300 h-full p-5 pt-8 bg-fifa-blue relative`}>
+            <div className={`${open ? "w-72" : "w-24 "} duration-300 h-screen p-5 pt-8 bg-fifa-blue relative`}>
                 <img src="https://cdn3.iconfinder.com/data/icons/cosmo-color-player-1/40/button_backward_1-512.png" alt="" className={`absolute cursor-pointer rounded-full -right-3 top-9 w-8 h-8 border-2 border-fifa-gray ${!open && "rotate-180"}`} onClick={() => setOpen(!open)}></img>
                 <div className="flex gap-x-4 items-center">
                     <img className={`cursor-pointer duration-500 w-16 h-16 ${open && "rotate-[360deg]"}`} src={football}></img>

@@ -8,6 +8,23 @@ from joblib import load
 import numpy as np 
 import os
 import pandas as pd
+# views.py
+from django.contrib.auth import authenticate, login
+from django.http import JsonResponse
+
+def user_login(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        user = authenticate(request, email=email, password=password)
+
+        if user is not None:
+            login(request, user)
+            return JsonResponse({'success': True, 'message': 'Login successful'})
+        else:
+            return JsonResponse({'success': False, 'message': 'Invalid credentials'})
+
+
 
 model = load(os.path.join(os.path.dirname(__file__), "../Models/priceQuess.pkl"))
 
