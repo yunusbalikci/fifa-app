@@ -9,7 +9,7 @@ export default function UserHeader(){
     const [open,setOpen] = useState(true)
     const Menus = [
         {title: "Dashboard", src:"https://cdn-icons-png.flaticon.com/512/187/187474.png" , to : "/dashboard"},
-        {title: "Administration", src:"https://cdn-icons-png.flaticon.com/512/2082/2082875.png"},
+        {title: "Administration", src:"https://cdn-icons-png.flaticon.com/512/2082/2082875.png", to: "/administration"},
         {title: "Team Staff", src:"https://cdn-icons-png.flaticon.com/512/236/236811.png"},
         {title: "Competitions", src:"https://cdn-icons-png.flaticon.com/512/4012/4012470.png", gap : true},
         {title: "Health", src:"https://brisdoc.co.uk/wp-content/uploads/2020/12/Health-Icon-1.svg"},
