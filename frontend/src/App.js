@@ -12,6 +12,7 @@ import User from "pages/private/User"
 import Dashboard from "pages/private/Dashboard";
 import Statistics from "pages/private/Statistics";
 import { useEffect, useState } from "react";
+import PlayerValueForm from "pages/private/PlayerValueForm";
 
 function App() {
   const [name, setName] = useState("");
@@ -55,6 +56,7 @@ function App() {
         <Route path="/home" element={<Home></Home>}></Route>
         <Route path="/user" element={<User></User>}></Route>
         <Route path="/statistics" element={<Statistics></Statistics>}></Route>
+        <Route path="/administration" element={<PlayerValueForm></PlayerValueForm>}></Route>
       </Routes>
     </>
   );

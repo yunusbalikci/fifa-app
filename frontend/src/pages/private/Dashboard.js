@@ -64,9 +64,9 @@ const data = [
     fullMark: selectedPlayer?.shooting,
   },
   {
-    subject: 'Mental',
+    subject: 'Pace',
   
-    fullMark: selectedPlayer?.mentality_composure,
+    fullMark: selectedPlayer?.pace,
   },
   {
     subject: 'Defending',
@@ -131,7 +131,7 @@ const data = [
                     <div className="flex item-center mx-auto justify-center">
                     {selectedPlayer && (
                         
-                      <div className='w-full ml-20 '>
+                      <div className='w-full ml-10 '>
                       <table className="table-auto bg-white w-128 ml-5 h-full rounded-md shadow-md uppercase font-open border text-xl mt-5">
                             <thead>
                                 <tr>
@@ -202,22 +202,70 @@ const data = [
                     
 
                     <h1 className="text-center">Players Details</h1>
-                    <div>
-                    <ul className="font-open">
-                     
-                    </ul>
-                    <div>
-                    </div>
-                    </div>
-                    
-                    <div className="w-full bg-white rounded-md shadow-md mt-10">
-                        <h1 className="text-center">ABILITIES GROWTH</h1>
-                        <img src="https://miro.medium.com/v2/resize:fit:1942/1*le8ngJPQRImQiPL9gQR-WQ.png"></img>
+                    <div className="w-full bg-white rounded-md shadow-md uppercase font-open border text-xl">
+                      <div className="flex">
+                        <div className="h-80">
+                          <img src="https://sortitoutsidospaces.b-cdn.net/megapacks/cutoutfaces/originals/10.12/7458272.png" className=" mt-5 overflow-hidden h-36 w-48" alt="" />
+                          <h1 className="text-center mt-1" >{selectedPlayer?.short_name}</h1>
+                          <h2 className="text-center mt-1 text-red-500">-{selectedPlayer?.overall}-</h2>
+                        </div>
+                        <div className="w-full grid grid-cols-2 grid-rows-1 gap-4">
+                          <ul className="list-none">
+                            <li className="flex space-y-2 text-lg flex-wrap mb-4">
+                              <h1 className="whitespace-nowrap mt-2">Skill Moves</h1> 
+                              <img src="https://i.pinimg.com/originals/e8/91/66/e891669c27c833ff0f2db2c083344117.png" className="ml-10 w-6 h-6 " alt="" /> 
+                              <p className=" ml-1">{selectedPlayer?.skill_moves}</p>  
+                            </li>
+                            <li className="flex space-y-2 border-t-fifa-blue border-t-2 text-lg flex-wrap mb-4">
+                              <h1 className="whitespace-nowrap mt-2">Pace Moves</h1> 
+                              <img src="https://i.pinimg.com/originals/e8/91/66/e891669c27c833ff0f2db2c083344117.png" className="ml-10 w-6 h-6" alt="" /> 
+                              <p className=" ml-1">{selectedPlayer?.skill_moves}</p>  
+                            </li>
+                            <li className="flex space-y-2 border-t-fifa-blue border-t-2 text-lg flex-wrap mb-4">
+                              <h1 className="whitespace-nowrap mt-2">Position</h1> 
+                              <p className="ml-12 whitespace-nowrap">{selectedPlayer?.player_positions}</p>
+                            </li>
+                            <li className="flex space-y-2 border-t-fifa-blue border-t-2 text-lg flex-wrap mb-4">
+                              <h1 className="whitespace-nowrap mt-2">Foot</h1> 
+                              <p className="ml-24">{selectedPlayer?.preferred_foot}</p>
+                            </li>
+                            <li className="flex space-y-2 border-t-fifa-blue border-t-2 text-lg flex-wrap mb-4">
+                              <h1 className="whitespace-nowrap mt-2">Nationality</h1> 
+                              <p className="ml-8">{selectedPlayer?.nationality}</p>
+                            </li>
+                          </ul>
 
-                    </div>
+                          <ul className="list-none">
+                            <li className="flex space-y-2 text-lg flex-wrap mb-4">
+                            <h1 className="whitespace-nowrap mt-2">Body</h1> 
+                              <p className="ml-16 ">{selectedPlayer?.body_type}</p>
+                            </li>
+                            <li className="flex space-y-2 border-t-fifa-blue border-t-2 text-lg flex-wrap mb-4">
+                            <h1 className="whitespace-nowrap mt-2">potential</h1> 
+                              <p className="ml-12 ">{selectedPlayer?.potential}</p>  
+                            </li>
+                            <li className="flex space-y-2 border-t-fifa-blue border-t-2 text-lg flex-wrap mb-4">
+                              <h1 className="whitespace-nowrap mt-2">dribbling</h1> 
+                              <p className="ml-12 ">{selectedPlayer?.dribbling}</p>
+                            </li>
+                            <li className="flex space-y-2 border-t-fifa-blue border-t-2 text-lg flex-wrap mb-4">
+                              <h1 className="whitespace-nowrap mt-2">physic</h1> 
+                              <p className="ml-20">{selectedPlayer?.physic}</p>
+                            </li>
+                            <li className="flex space-y-2 border-t-fifa-blue border-t-2 text-lg flex-wrap mb-4">
+                              <h1 className="whitespace-nowrap mt-2">Mentaliy</h1> 
+                              <p className="ml-16">{selectedPlayer?.mentality_aggression}</p>
+                            </li>
+                          </ul>
+                        </div>
+
+                        </div>
+                    <div>
+                  </div>
                 </div>
+              </div>
             </div>
-            </div>
+          </div>
         </motion.div>
     )
 }
