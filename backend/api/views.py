@@ -8,22 +8,23 @@ from joblib import load
 import numpy as np
 import os
 import pandas as pd
+
 # views.py
 from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
 
+
 def user_login(request):
-    if request.method == 'POST':
-        email = request.POST.get('email')
-        password = request.POST.get('password')
+    if request.method == "POST":
+        email = request.POST.get("email")
+        password = request.POST.get("password")
         user = authenticate(request, email=email, password=password)
 
         if user is not None:
             login(request, user)
-            return JsonResponse({'success': True, 'message': 'Login successful'})
+            return JsonResponse({"success": True, "message": "Login successful"})
         else:
-            return JsonResponse({'success': False, 'message': 'Invalid credentials'})
-
+            return JsonResponse({"success": False, "message": "Invalid credentials"})
 
 
 model = load(os.path.join(os.path.dirname(__file__), "../Models/priceQuess.pkl"))
@@ -151,19 +152,19 @@ def PlayerValue(request):
 
 
 @api_view(["POST"])
-def positionQuess(request):
+def PositionQuess(request):
     """
     Selected columns:
     'Acceleration', 'Crossing', 'Dribbling', 'Finishing',
-    'Heading accuracy', 'Long passing', 'Positioning', 
+    'Heading accuracy', 'Long passing', 'Positioning',
     'Sliding tackle', 'Standing tackle', 'Vision'
-    
+
     Position mapping:
      "ST": 0,"RW": 1,"LW": 1, "RM": 2,"CM": 3,"LM": 2,
     "CAM": 4,"CF": 5,"CDM": 6,"CB": 7,"LB": 8,"RB": 8,
     "RWB": 8,"LWB": 8,
     """
-    
+
     if request.method == "POST":
         Acceleration = request.data.get("Acceleration")
         Crossing = request.data.get("Crossing")
@@ -224,4 +225,26 @@ def positionQuess(request):
 
     else:
         return Response("Send a POST request with the features to get a prediction.")
+
+
+# Get all palayers from same team and select best 11 players according to their overall with their position
+@api_view(["GET"])
+def BestTeam(request):
+    # * select players from Real Madrid
+    team = Players20.objects.filter(club="Real Madrid")
     
+    
+    get_goalkeeper = team.filter(team_position="GK").order_by("-overall")[0]
+    get_defenders = team.filter(team_position__in=["RB", "CB", "LB"]).order_by("-overall")
+    get_midfielders = team.filter(team_position__in=["CDM", "CM", "CAM"]).order_by("-overall")
+    get_attackers = team.filter(team_position__in=["ST", "LW", "RW"]).order_by("-overall")
+
+    defenders = get_defenders[:3] if get_defenders.count() >= 3 else get_defenders
+    midfielders = get_midfielders[:3] if get_midfielders.count() >= 3 else get_midfielders
+    attackers = get_attackers[:4] if get_attackers.count() >= 4 else get_attackers
+
+    best_team = [get_goalkeeper, *defenders, *midfielders, *attackers]
+   
+    serializer = Players20Serializer(best_team, many=True)
+    
+    return Response(serializer.data)
