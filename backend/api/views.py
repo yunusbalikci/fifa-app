@@ -8,7 +8,23 @@ from joblib import load
 import numpy as np
 import os
 import pandas as pd
-from sklearn.pipeline import make_pipeline
+
+# views.py
+from django.contrib.auth import authenticate, login
+from django.http import JsonResponse
+
+
+def user_login(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        user = authenticate(request, email=email, password=password)
+
+        if user is not None:
+            login(request, user)
+            return JsonResponse({"success": True, "message": "Login successful"})
+        else:
+            return JsonResponse({"success": False, "message": "Invalid credentials"})
 
 
 model = load(os.path.join(os.path.dirname(__file__), "../Models/priceQuess.pkl"))
@@ -44,6 +60,43 @@ def TeamList(request):
     teams = TeamsAndLeagues.objects.all()
     serializer = TeamsAndLeaguesSerializer(teams, many=True)
     return Response(serializer.data)
+
+
+@api_view(["GET"])
+def deneme(request):
+    routes = [
+        {
+            "Endpoint": "/notes/",
+            "method": "GET",
+            "body": None,
+            "description": "Returns an array of notes.",
+        },
+        {
+            "Endpoint": "/notes/id",
+            "method": "GET",
+            "body": None,
+            "description": "Returns a single note object.",
+        },
+        {
+            "Endpoint": "/notes/create",
+            "method": "POST",
+            "body": {"body": ""},
+            "description": "Creates a new note with data sent in post request.",
+        },
+        {
+            "Endpoint": "/notes/id/update",
+            "method": "PUT",
+            "body": {"body": ""},
+            "description": "Updates an existing note with data sent in post request.",
+        },
+        {
+            "Endpoint": "/notes/id/delete",
+            "method": "DELETE",
+            "body": None,
+            "description": "Deletes an existing note.",
+        },
+    ]
+    return Response(routes)
 
 
 @api_view(["POST"])
@@ -85,11 +138,8 @@ def PlayerValue(request):
         # Create a dataframe from the features
         features_df = pd.DataFrame([features_dict])
 
-        # Ensure the model is wrapped in the same pipeline used during training
-        pipeline = make_pipeline(model)
-    
-        # Make a prediction using the pipeline
-        prediction = pipeline.predict(features_df)
+        # Make a prediction using the random forest model
+        prediction = model.predict(features_df)
 
         # Add the prediction to the response dictionary
         response["prediction"] = prediction[0]
@@ -164,11 +214,8 @@ def PositionQuess(request):
         # Create a dataframe from the features
         features_df = pd.DataFrame([features_dict])
 
-        # Ensure the model is wrapped in the same pipeline used during training
-        pipeline = make_pipeline(position_model)
-        
-        # Make a prediction using the pipeline
-        prediction = pipeline.predict(features_df)
+        # Make a prediction using the random forest model
+        prediction = position_model.predict(features_df)
 
         # Add the prediction to the response dictionary
         response["prediction"] = prediction[0]
