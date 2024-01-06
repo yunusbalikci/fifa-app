@@ -9,29 +9,11 @@ import numpy as np
 import os
 import pandas as pd
 
-# views.py
-from django.contrib.auth import authenticate, login
-from django.http import JsonResponse
-
-
-def user_login(request):
-    if request.method == "POST":
-        email = request.POST.get("email")
-        password = request.POST.get("password")
-        user = authenticate(request, email=email, password=password)
-
-        if user is not None:
-            login(request, user)
-            return JsonResponse({"success": True, "message": "Login successful"})
-        else:
-            return JsonResponse({"success": False, "message": "Invalid credentials"})
-
-
+# Load the model
 model = load(os.path.join(os.path.dirname(__file__), "../Models/priceQuess.pkl"))
 position_model = load(
     os.path.join(os.path.dirname(__file__), "../Models/position_guess_model.pkl")
 )
-
 
 # Create your views here.
 
@@ -60,43 +42,6 @@ def TeamList(request):
     teams = TeamsAndLeagues.objects.all()
     serializer = TeamsAndLeaguesSerializer(teams, many=True)
     return Response(serializer.data)
-
-
-@api_view(["GET"])
-def deneme(request):
-    routes = [
-        {
-            "Endpoint": "/notes/",
-            "method": "GET",
-            "body": None,
-            "description": "Returns an array of notes.",
-        },
-        {
-            "Endpoint": "/notes/id",
-            "method": "GET",
-            "body": None,
-            "description": "Returns a single note object.",
-        },
-        {
-            "Endpoint": "/notes/create",
-            "method": "POST",
-            "body": {"body": ""},
-            "description": "Creates a new note with data sent in post request.",
-        },
-        {
-            "Endpoint": "/notes/id/update",
-            "method": "PUT",
-            "body": {"body": ""},
-            "description": "Updates an existing note with data sent in post request.",
-        },
-        {
-            "Endpoint": "/notes/id/delete",
-            "method": "DELETE",
-            "body": None,
-            "description": "Deletes an existing note.",
-        },
-    ]
-    return Response(routes)
 
 
 @api_view(["POST"])
@@ -230,21 +175,32 @@ def PositionQuess(request):
 # Get all palayers from same team and select best 11 players according to their overall with their position
 @api_view(["GET"])
 def BestTeam(request):
-    # * select players from Real Madrid
-    team = Players20.objects.filter(club="Real Madrid")
-    
-    
-    get_goalkeeper = team.filter(team_position="GK").order_by("-overall")[0]
-    get_defenders = team.filter(team_position__in=["RB", "CB", "LB"]).order_by("-overall")
-    get_midfielders = team.filter(team_position__in=["CDM", "CM", "CAM"]).order_by("-overall")
-    get_attackers = team.filter(team_position__in=["ST", "LW", "RW"]).order_by("-overall")
+    def get_best_player(position):
+        players = Players20.objects.filter(
+            club="Real Madrid", team_position=position
+        ).order_by("-overall")
+        return players[0] if players else None
 
-    defenders = get_defenders[:3] if get_defenders.count() >= 3 else get_defenders
-    midfielders = get_midfielders[:3] if get_midfielders.count() >= 3 else get_midfielders
-    attackers = get_attackers[:4] if get_attackers.count() >= 4 else get_attackers
+    gk = get_best_player("GK")
+    backs = ["RB", "LB", "CB", "RWB", "LWB"]
+    centers = ["CB", "CM", "CDM", "CAM"]
+    wings = ["LM", "RM", "LW", "RW"]
+    forwards = ["ST", "CF"]
 
-    best_team = [get_goalkeeper, *defenders, *midfielders, *attackers]
-   
+    # get the best players from each position
+    players = sorted(
+        [player for player in (get_best_player(position) for position in backs + centers + wings + forwards) if player is not None], 
+        key=lambda x: x.overall
+    )
+
+    # if there are not enough players, fill the remaining spots with the top players from all positions
+    if len(players) < 10:
+        all_players = Players20.objects.filter(club="Real Madrid").order_by("-overall")
+        players += all_players[:10 - len(players)]
+
+    # get all player in the best team
+    best_team = [player for player in [gk] + players if player is not None]
+    
+    # serialize the best team
     serializer = Players20Serializer(best_team, many=True)
-    
     return Response(serializer.data)
