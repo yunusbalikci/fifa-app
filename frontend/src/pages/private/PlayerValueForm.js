@@ -7,25 +7,25 @@ const PlayerValueForm = () => {
   const [position, setPosition] = useState(null);
 
   const [inputValues, setInputValues] = useState({
-    Overall: 0,
-    Potential: 0,
-    Ball_control: 0,
-    Composure: 0,
-    Reactions: 0,
-    Age: 0,
+    Overall: "0",
+    Potential: "0",
+    Ball_control: "0",
+    Composure: "0",
+    Reactions: "0",
+    Age: "0",
   });
 
   const [inputPositions, setInputPositions] = useState({
-    Acceleration: 0,
-    Crossing: 0,
-    Dribbling: 0,
-    Finishing: 0,
-    Heading_accuracy: 0,
-    Long_passing: 0,
-    Positioning: 0,
-    Sliding_tackle: 0,
-    Standing_tackle: 0,
-    Vision: 0,
+    Acceleration: "0",
+    Crossing: "0",
+    Dribbling: "0",
+    Finishing: "0",
+    Heading_accuracy: "0",
+    Long_passing: "0",
+    Positioning: "0",
+    Sliding_tackle: "0",
+    Standing_tackle: "0",
+    Vision: "0",
   });
 
   const positionSubmit = async (e) => {
@@ -372,12 +372,15 @@ const PlayerValueForm = () => {
               >
                 Cost
               </button>
-              <h1 className="mt-3 text-gray-700 text-sm font-bold block">
-                {position !== null ? `Sonuç: ${position}` : "" ? "" : ""}
+              <h1 className="mt-3 text-gray-700 text-lg font-bold block">
+              {position !== null ? `The Best Position is: ${position === 0 ? "ST" : position === 1 ? "RW" : position === 2 ? "RM" : position === 3 ? "CM" : position === 4 ? "CAM" : position === 5 ? "CF" : position === 6 ? "CDM" : position === 7 ? "CB" : position === 8 ? "LB,RB,RWB,LWB"  : ""}` : ""}
               </h1>
             </div>
           </form>
         </div>
+
+       
+
       </div>
     </div>
   );

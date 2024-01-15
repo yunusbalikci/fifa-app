@@ -12,6 +12,7 @@ import User from "pages/private/User"
 import Dashboard from "pages/private/Dashboard";
 import Statistics from "pages/private/Statistics";
 import { useEffect, useState } from "react";
+import BestEleven from "pages/private/BestEleven";
 import PlayerValueForm from "pages/private/PlayerValueForm";
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
         <Route path="/user" element={<User></User>}></Route>
         <Route path="/statistics" element={<Statistics></Statistics>}></Route>
         <Route path="/administration" element={<PlayerValueForm></PlayerValueForm>}></Route>
+        <Route path="/besteleven" element={<BestEleven></BestEleven>}></Route>
       </Routes>
     </>
   );

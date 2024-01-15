@@ -208,8 +208,9 @@ const data = [
                           <img src="https://sortitoutsidospaces.b-cdn.net/megapacks/cutoutfaces/originals/10.12/7458272.png" className=" mt-5 overflow-hidden h-36 w-48" alt="" />
                           <h1 className="text-center mt-1" >{selectedPlayer?.short_name}</h1>
                           <h2 className="text-center mt-1 text-red-500">-{selectedPlayer?.overall}-</h2>
+                          <h3 className="text-center mt-1">{selectedPlayer?.age}y.o</h3>
                         </div>
-                        <div className="w-full grid grid-cols-2 grid-rows-1 gap-4">
+                        <div className="w-full grid grid-cols-2  grid-rows-1 gap-4">
                           <ul className="list-none">
                             <li className="flex space-y-2 text-lg flex-wrap mb-4">
                               <h1 className="whitespace-nowrap mt-2">Skill Moves</h1> 
@@ -231,7 +232,7 @@ const data = [
                             </li>
                             <li className="flex space-y-2 border-t-fifa-blue border-t-2 text-lg flex-wrap mb-4">
                               <h1 className="whitespace-nowrap mt-2">Nationality</h1> 
-                              <p className="ml-8">{selectedPlayer?.nationality}</p>
+                              <p className="ml-4">{selectedPlayer?.nationality}</p>
                             </li>
                           </ul>
 

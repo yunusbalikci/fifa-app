@@ -12,6 +12,12 @@ module.exports = {
       }
     },
     extend: {
+      width: {
+        '256': '256px',
+      },
+      height: {
+        '120': '120px',
+      },
       fontFamily:{
         open:['Open Sans', 'sans-serif']
       },
